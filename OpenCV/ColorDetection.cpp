@@ -1,12 +1,6 @@
 #include "ColorDetection.h"
-#include "globalVariables.h"
 
 
-
-void onTrackBarChanged(int value, void* userData) {
-    brightness = value;
-
-}
 
 void detectAndDrawContours(cv::Mat& frame, cv::Mat& hsvFrame, cv::Scalar const& lowerColor, cv::Scalar const& upperColor) {
     cv::Mat Mask;
@@ -34,6 +28,8 @@ void detectAndDrawContours(cv::Mat& frame, cv::Mat& hsvFrame, cv::Scalar const& 
     }
 }
 
+
+
 void displayFrame(const ColorRange& colorRange) {
     cv::Mat frame;
     cv::Mat hsvFrame;
@@ -47,7 +43,6 @@ void displayFrame(const ColorRange& colorRange) {
     }
 
     cv::namedWindow("Webcam Feed", cv::WINDOW_NORMAL);
-    cv::createTrackbar("Brightness", "Webcam Feed", &brightness, 100, onTrackBarChanged);
 
     do {
         vcap >> frame;
@@ -56,11 +51,10 @@ void displayFrame(const ColorRange& colorRange) {
             std::cerr << "Error: Blank frame grabbed" << std::endl;
             break;
         }
+
         cv::cvtColor(frame, hsvFrame, cv::COLOR_BGR2HSV);
 
         detectAndDrawContours(frame, hsvFrame, colorRange.lower, colorRange.upper);
-
-        frame.convertTo(adjustedFrame, -1, brightness / 100.0, 0);
 
         cv::imshow("Webcam Feed", frame);
 
