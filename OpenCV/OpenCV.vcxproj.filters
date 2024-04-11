@@ -45,7 +45,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ColorDetection.cpp">
+    <ClCompile Include="HandGestures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
